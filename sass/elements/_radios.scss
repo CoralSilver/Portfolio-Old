@@ -1,0 +1,197 @@
+//elements/_radios.scss
+
+// Radios and checkboxes
+//
+// Styleguide 3.9
+
+// Custom checkbox
+//
+// markup:
+// <input type="checkbox" class="checkbox-image" id="checkbox1"/>
+// <label for="checkbox1">Check One</label>
+//
+// Styleguide 3.9.1.
+
+// Custom radio
+//
+// markup:
+// <input type="radio" class="checkbox-image" name="radio-item" id="radio1"/>
+// <label for="radio1">Radio One</label>
+// <input type="radio" class="checkbox-image" name="radio-item" id="radio2"/>
+// <label for="radio2">Radio Two</label>
+// <input type="radio" class="checkbox-image" name="radio-item" id="radio3"/>
+// <label for="radio3">Radio Three</label>
+//
+// Styleguide 3.9.2.
+
+// Vertical radios or checkboxes
+//
+// markup:
+// <form class="form-group-block">
+// <input type="radio" class="checkbox-image" name="radio-item" id="radio1-1"/>
+// <label for="radio1-1">Radio One</label>
+// <input type="radio" class="checkbox-image" name="radio-item" id="radio2-1"/>
+// <label for="radio2-1">Radio Two</label>
+// <input type="radio" class="checkbox-image" name="radio-item" id="radio3-1" disabled/>
+// <label for="radio3-1">Radio Three</label>
+// </form>
+//
+// Styleguide 3.9.3.
+
+//Large Custom Radios
+
+.radio-large {
+  input[type="radio"] {
+    //makes default input invisible, but keeps it tab accessable
+    @extend .screen-reader-only;
+    &:checked +  label:before {
+    @include retina-sprite($radio-checked-group);
+     content: " ";
+     height: 31px;   //hack --overriding dimensions output by sprite builder (30px square) so selected circle is center aligned
+     width: 31px;
+    + input[type="radio"]:focus{
+      outline: 1px solid black;
+    }
+   }
+  }
+  > label {
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    padding-left: 45px;
+    margin-right: 15px;
+  }
+  label:before {
+   border: $base-border-darker;
+   border-radius: 50%;
+   content: "";
+   display: inline-block;
+   width: 31px;
+   height: 31px;
+   margin-right: 10px;
+   position: absolute;
+   left: 0;
+   bottom: 5px;
+   background-color: #fff;
+    @include breakpoint($medium-screen-down) {
+      bottom: 4px;
+    }
+  }
+  > p {
+    padding-left: 45px;
+  }
+}
+
+
+input[type="checkbox"], input.checkbox-image {
+  //makes default input invisible, but keeps it tab accessable
+  @extend .screen-reader-only;
+  // positions the default broswer input underneath the custom image instead of top of page
+  // so when user clicks on input browser doesn't jump to top of page.
+  opacity: 0; // so input is not visible underneath disabled inputs with lowered opacity
+  position: relative !important;
+  top: -9px;
+  left: 9px;
+}
+
+input[type="checkbox"] + label, .checkbox-image + label {
+  position: relative;
+  &::before {
+    background: $white;
+    border: 1px solid darken($base-border-color, 25%);
+    box-sizing: content-box;
+    content: " ";
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 9px;
+    position: relative;
+    width: 20px;
+    height: 20px;
+  }
+  &::after {  //extends touch/click target area
+    content: '';
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    left: -10px;
+    bottom: -10px;
+  }
+}
+
+input[type="checkbox"]:disabled + label::before, .checkbox-image:disabled + label::before {
+  opacity: .4;
+}
+
+input[type="checkbox"]:checked + label, .checkbox-image:checked + label {
+    &::before {
+    @include retina-sprite($checkbox-checked-group);
+    box-sizing: content-box;
+    content: " ";
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 9px;
+    position: relative;
+  }
+  &::after {  //extends touch/click target area
+    content: '';
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    left: -10px;
+    bottom: -10px;
+  }
+}
+
+table {
+  input[type="checkbox"] + label, .checkbox-image + label {
+    margin-bottom: 0;
+  }
+}
+
+input[type=checkbox]:focus+label::before, input.checkbox-image:focus+label::before{
+  box-shadow: inset 0px 0px 3px rgba(90, 94, 169, .9), 0 0 3px rgba(80, 84, 153, .9);
+  outline: none;
+}
+
+
+// small checkbox-image
+input.small-checkbox-image {
+  //makes default input invisible, but keeps it tab accessable
+  @extend .screen-reader-only;
+  // positions the default broswer input underneath the custom image instead of top of page
+  // so when user clicks on input browser doesn't jump to top of page.
+  opacity: 0; // so input is not visible underneath disabled inputs with lowered opacity
+  position: relative !important;
+  top: -9px;
+  left: 9px;
+}
+
+input.small-checkbox-image + label::before {
+  background: $white;
+  border: 1px solid darken($base-border-color, 25%);;
+  content: " ";
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+  position: relative;
+  width: 17px;
+  height: 17px;
+}
+
+input.small-checkbox-image:disabled + label::before {
+  opacity: .4;
+}
+
+input.small-checkbox-image:checked + label::before {
+  @include retina-sprite($checkbox-small-checked-group);
+  content: " ";
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+  position: relative;
+}
+
+input.checkbox-small-image:focus+label::before{
+  box-shadow: inset 0px 0px 3px rgba(90, 94, 169, .9), 0 0 3px rgba(80, 84, 153, .9);
+  outline: none;
+}

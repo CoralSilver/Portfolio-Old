@@ -1,0 +1,30 @@
+.flex-container {
+  display: flex;
+  &--wrap {
+    flex-wrap: wrap;
+  }
+  &--space-between {
+    justify-content: space-between;
+  }
+}
+
+.grid {
+  flex: 0 0 100%;
+  max-width: 100%;
+  @include breakpoint($small-screen-up) {
+    &:not(:last-child) {
+      padding-right: $base-spacing;
+    }
+    &--half {
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
+  }
+  &--stretch-column {
+    display: flex;
+    flex-direction: column
+  }
+  > textarea {
+    flex: 1;
+  }
+}
