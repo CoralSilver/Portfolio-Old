@@ -31,6 +31,9 @@ gulp.task('sass', function () {
      .pipe(prefix(
          'last 2 version'
      ))
+     .pipe(uncss({
+        html: ['index.html']
+      }))
      // Write sourcemaps to a separate file
      .pipe(sourcemaps.write('.'))
      .pipe(notify({
