@@ -5,6 +5,8 @@ var sassLint = require('gulp-sass-lint');
 var sass = require('gulp-sass');
 var prefix = require('gulp-autoprefixer');
 var sourcemaps = require('gulp-sourcemaps');
+var uncss = require('gulp-uncss');
+var cssnano = require('gulp-cssnano');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
@@ -31,9 +33,10 @@ gulp.task('sass', function () {
      .pipe(prefix(
          'last 2 version'
      ))
-     .pipe(uncss({
-        html: ['index.html']
-      }))
+    //  .pipe(uncss({
+    //     html: ['index.html']
+    //   }))
+     .pipe(cssnano())
      // Write sourcemaps to a separate file
      .pipe(sourcemaps.write('.'))
      .pipe(notify({
